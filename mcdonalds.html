@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>McFunky — A Mock FastFood Website</title>
+    <meta name="description" content="A playful, modern mock fastfood website built with Tailwind CSS." />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ketchup: {
+                50: '#fff1f1',
+                100: '#ffe1e1',
+                200: '#ffc7c7',
+                300: '#ffa0a0',
+                400: '#ff6a6a',
+                500: '#ef2b2b',
+                600: '#d91f1f',
+                700: '#b21616',
+                800: '#8a1313',
+                900: '#701313',
+              },
+              mustard: {
+                50: '#fff9e6',
+                100: '#fff2c2',
+                200: '#ffe483',
+                300: '#ffd24d',
+                400: '#ffc21a',
+                500: '#f7b500',
+                600: '#d69b00',
+                700: '#a97500',
+                800: '#7a5500',
+                900: '#5f4300',
+              },
+              pickle: '#3ebd6b',
+            },
+            boxShadow: {
+              squish: '0 10px 40px rgba(239, 43, 43, 0.25)',
+              card: '0 12px 30px rgba(0,0,0,0.12)'
+            },
+            fontFamily: {
+              display: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            },
+          }
+        }
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      /* Fun wiggle keyframes for hover bits */
+      @keyframes wiggle {
+        0%, 100% { transform: rotate(-1deg) translateY(0); }
+        50% { transform: rotate(1deg) translateY(-2px); }
+      }
+      .wiggle:hover { animation: wiggle 0.35s ease-in-out both; }
+      /* Soft gradient bg */
+      .bg-dots {
+        background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px);
+        background-size: 14px 14px;
+      }
+      .glass {
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.55);
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-gradient-to-br from-ketchup-600 via-ketchup-500 to-mustard-400 text-gray-900">
+    <!-- Announcement / Top bar -->
+    <div class="sticky top-0 z-50">
+      <div class="glass text-sm text-gray-800 py-2 px-3 sm:px-6 flex items-center justify-center gap-2">
+        <span class="inline-flex items-center gap-2 font-semibold">
+          <span class="text-xl"></span>
+          <span>2for1 Fries this Friday!</span>
+        </span>
+        <a href="#deals" class="ml-3 underline underline-offset-4 hover:no-underline font-medium">Grab the deal</a>
+      </div>
+
+      <!-- Navbar -->
+      <header class="mx-auto max-w-7xl px-3 sm:px-6">
+        <div class="mt-3 rounded-2xl glass border border-white/50 shadow-card">
+          <div class="flex items-center justify-between px-4 sm:px-6 py-3">
+            <a href="#" class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-2xl bg-gradient-to-br from-mustard-300 to-mustard-500 grid place-items-center shadow-squish">
+                <span class="text-2xl"></span>
+              </div>
+              <span class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-ketchup-700">McFunky</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 font-semibold text-gray-800">
+              <a class="hover:text-ketchup-700" href="#menu">Menu</a>
+              <a class="hover:text-ketchup-700" href="#deals">Deals</a>
+              <a class="hover:text-ketchup-700" href="#app">App</a>
+              <a class="hover:text-ketchup-700" href="#locations">Locations</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+              <a href="#order" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-black text-white px-4 py-2 font-semibold shadow-card hover:opacity-90 transition">
+                <span class="text-lg"></span>Order Now
+              </a>
+
+              <!-- Mobile menu button -->
+              <button id="menuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-black/90 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile menu -->
+          <div id="mobileMenu" class="hidden md:hidden border-t border-white/50 px-4 py-4">
+            <nav class="grid gap-3 font-semibold">
+              <a class="hover:text-ketchup-700" href="#menu">Menu</a>
+              <a class="hover:text-ketchup-700" href="#deals">Deals</a>
+              <a class="hover:text-ketchup-700" href="#app">App</a>
+              <a class="hover:text-ketchup-700" href="#locations">Locations</a>
+              <a href="#order" class="inline-flex items-center gap-2 rounded-full bg-black text-white px-4 py-2 font-semibold shadow-card w-max">
+                <span class="text-lg"></span>Order Now
+              </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-dots opacity-30"></div>
+      <!-- fun blobs -->
+      <svg class="absolute -top-24 -left-24 w-[28rem] opacity-40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FFD24D" d="M41.4,-64.4C52.4,-59.1,59.9,-47.1,66.8,-34.5C73.6,-21.9,79.8,-8.6,79.4,4.1C79,16.8,72,28.8,63.5,40.8C55,52.7,45.1,64.6,32.7,70.9C20.3,77.2,5.5,77.8,-8.5,74.5C-22.5,71.2,-35.6,64,-47.2,54.6C-58.9,45.2,-69.1,33.7,-73.5,20.1C-78,6.6,-76.8,-8.9,-70.3,-22.1C-63.7,-35.3,-51.8,-46.2,-38.9,-52.2C-26,-58.1,-13,-59.1,0.7,-60.3C14.5,-61.5,29,-62,41.4,-64.4Z" transform="translate(100 100)" />
+      </svg>
+      <svg class="absolute -bottom-24 -right-24 w-[30rem] opacity-30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#EF2B2B" d="M34.1,-56.7C46.7,-49.7,60.8,-44.1,68.7,-33.9C76.6,-23.7,78.2,-9,74.8,4.5C71.4,18,62.9,30.3,52.7,38.7C42.6,47,30.8,51.3,18.4,55.2C6,59.1,-7,62.6,-20.7,61.6C-34.4,60.7,-48.7,55.4,-58.2,45.2C-67.7,35,-72.4,20.9,-74.6,6.3C-76.8,-8.3,-76.4,-23.4,-69.8,-34.9C-63.1,-46.4,-50.1,-54.9,-37.1,-61.9C-24.1,-68.9,-12.1,-74.4,-1,-72.9C10.1,-71.4,20.2,-63.7,34.1,-56.7Z" transform="translate(100 100)" />
+      </svg>
+
+      <div class="relative mx-auto max-w-7xl px-3 sm:px-6 pt-14 sm:pt-20">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div class="text-white/95">
+            <h1 class="font-display text-4xl sm:text-6xl font-extrabold leading-[1.05] drop-shadow-[0_2px_0_rgba(0,0,0,0.2)]">Burgers that <span class="text-black bg-mustard-300 px-2 rounded-md">slap</span> and fries that go <span class="text-black bg-mustard-300 px-2 rounded-md">crazy</span>.</h1>
+            <p class="mt-5 text-lg sm:text-xl text-white/90 max-w-prose">Welcome to <strong>McFunky</strong> — a playful mock fast food site. No real orders here, just delicious vibes, crispy pixels, and saucy UI.</p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href="#order" class="inline-flex items-center gap-3 rounded-full bg-black text-white px-6 py-3 font-bold text-lg shadow-squish wiggle">Order Now</a>
+              <a href="#menu" class="inline-flex items-center gap-3 rounded-full bg-white/90 text-black px-6 py-3 font-bold text-lg shadow-card hover:bg-white">View Menu</a>
+            </div>
+            <div class="mt-6 flex items-center gap-4 text-white/90">
+              <div class="flex -space-x-2">
+                <img class="w-8 h-8 rounded-full ring-2 ring-white/70" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=64&auto=format&fit=crop" alt="avatar"/>
+                <img class="w-8 h-8 rounded-full ring-2 ring-white/70" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=64&auto=format&fit=crop" alt="avatar"/>
+                <img class="w-8 h-8 rounded-full ring-2 ring-white/70" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=64&auto=format&fit=crop" alt="avatar"/>
+              </div>
+              <p class="text-sm font-semibold">1000+ happy fake eaters</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="rounded-3xl overflow-hidden shadow-squish border-4 border-white/60">
+              <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1080&auto=format&fit=crop" alt="burger and fries" class="w-full h-[420px] object-cover"/>
+            </div>
+            <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl px-4 py-3 shadow-card border border-black/10 rotate-[-3deg]">
+              <p class="font-extrabold text-lg">New: Spicy Stack</p>
+              <p class="text-sm text-gray-600">Double patty, jalapeño kick.</p>
+            </div>
+            <div class="absolute -top-6 -right-6 bg-black text-white rounded-2xl px-4 py-2 shadow-card rotate-[3deg]">
+              <p class="font-extrabold">Open late</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="relative py-16 sm:py-24">
+      <div class="absolute inset-0 -z-10 bg-white/85"></div>
+      <div class="mx-auto max-w-7xl px-3 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-ketchup-700">Menu Highlights</h2>
+          <a href="#order" class="inline-flex items-center gap-2 rounded-full bg-ketchup-600 text-white px-5 py-2.5 font-semibold shadow-card hover:bg-ketchup-700">Build Your Combo →</a>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <article class="group rounded-3xl bg-white border border-black/5 shadow-card overflow-hidden hover:-translate-y-1 transition">
+            <div class="relative">
+              <img class="w-full h-52 object-cover" alt="classic burger" src="https://images.unsplash.com/photo-1550547660-1f1a02b8b6d2?q=80&w=1080&auto=format&fit=crop" />
+              <span class="absolute top-3 left-3 bg-mustard-400 text-black text-xs font-black tracking-widest px-2 py-1 rounded">SIGNATURE</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-extrabold text-xl">The Classic Smash</h3>
+              <p class="mt-2 text-gray-600">Smash seared beef, melty cheese, pickles, special sauce, toasted bun.</p>
+              <div class="mt-4 flex items-center justify-between">
+                <span class="font-extrabold text-lg">£5.99</span>
+                <button class="px-4 py-2 bg-black text-white rounded-full font-semibold group-hover:scale-105 transition">Add</button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 2 -->
+          <article class="group rounded-3xl bg-white border border-black/5 shadow-card overflow-hidden hover:-translate-y-1 transition">
+            <div class="relative">
+              <img class="w-full h-52 object-cover" alt="chicken burger" src="https://images.unsplash.com/photo-1606756790138-261d1f3d9f4e?q=80&w=1080&auto=format&fit=crop" />
+              <span class="absolute top-3 left-3 bg-ketchup-500 text-white text-xs font-black tracking-widest px-2 py-1 rounded">SPICY</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-extrabold text-xl">Firebird Deluxe</h3>
+              <p class="mt-2 text-gray-600">Crispy chicken, hot honey glaze, slaw, chipotle mayo.</p>
+              <div class="mt-4 flex items-center justify-between">
+                <span class="font-extrabold text-lg">£6.49</span>
+                <button class="px-4 py-2 bg-black text-white rounded-full font-semibold group-hover:scale-105 transition">Add</button>
+              </div>
+            </div>
+          </article>
+          <!-- Card 3 -->
+          <article class="group rounded-3xl bg-white border border-black/5 shadow-card overflow-hidden hover:-translate-y-1 transition">
+            <div class="relative">
+              <img class="w-full h-52 object-cover" alt="fries" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1080&auto=format&fit=crop" />
+              <span class="absolute top-3 left-3 bg-pickle text-white text-xs font-black tracking-widest px-2 py-1 rounded">VEGGIE</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-extrabold text-xl">Greens & Fries Box</h3>
+              <p class="mt-2 text-gray-600">Seasoned fries, herby salad, zesty dip — balance, baby.</p>
+              <div class="mt-4 flex items-center justify-between">
+                <span class="font-extrabold text-lg">£4.49</span>
+                <button class="px-4 py-2 bg-black text-white rounded-full font-semibold group-hover:scale-105 transition">Add</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deals / Promo -->
+    <section id="deals" class="relative py-16 sm:py-24">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-br from-mustard-100 via-white to-mustard-50"></div>
+      <div class="mx-auto max-w-7xl px-3 sm:px-6">
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+          <div class="rounded-3xl p-6 sm:p-10 bg-white/80 border border-black/10 shadow-card">
+            <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-ketchup-700">This Week's Hot Deals</h2>
+            <ul class="mt-6 space-y-4 text-lg">
+              <li class="flex items-start gap-3"><span class="text-2xl"></span> <span><strong>Spicy Stack</strong> + Fries + Drink — <span class="line-through text-gray-400">£8.99</span> <span class="font-extrabold">£6.99</span></span></li>
+              <li class="flex items-start gap-3"><span class="text-2xl"></span> <span><strong>Two Classics</strong> — any time after 6pm — <span class="font-extrabold">£7.99</span></span></li>
+              <li class="flex items-start gap-3"><span class="text-2xl"></span> <span><strong>Soft serve Sundays</strong> — 50% off cones</span></li>
+            </ul>
+            <a href="#order" class="mt-8 inline-flex items-center gap-3 rounded-full bg-ketchup-600 text-white px-6 py-3 font-bold text-lg shadow-squish wiggle">Grab a Deal</a>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div class="rounded-3xl overflow-hidden border-4 border-white/60 shadow-squish">
+              <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=1080&auto=format&fit=crop" alt="ice cream" />
+            </div>
+            <div class="rounded-3xl overflow-hidden border-4 border-white/60 shadow-squish">
+              <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1080&auto=format&fit=crop" alt="shakes" />
+            </div>
+            <div class="rounded-3xl overflow-hidden border-4 border-white/60 shadow-squish sm:col-span-2">
+              <img class="w-full h-64 object-cover" src="https://images.unsplash.com/photo-1550959249-8b1541a7a5b4?q=80&w=1600&auto=format&fit=crop" alt="burgers" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- App CTA -->
+    <section id="app" class="relative py-16 sm:py-24">
+      <div class="absolute inset-0 -z-10 bg-black/90"></div>
+      <div class="mx-auto max-w-7xl px-3 sm:px-6 text-white">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 class="font-display text-3xl sm:text-5xl font-extrabold">Tap in with the McFunky App</h2>
+            <p class="mt-4 text-white/80 text-lg max-w-prose">Earn points, skip the line, and unlock secret menu drops. Available on iOS & Android — in our dreams, anyway.</p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href="#" class="inline-flex items-center gap-3 rounded-xl bg-white text-black px-5 py-3 font-bold shadow-card">
+                <span class="text-2xl"></span> <span>App Store</span>
+              </a>
+              <a href="#" class="inline-flex items-center gap-3 rounded-xl bg-white text-black px-5 py-3 font-bold shadow-card">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 336.7 120.9 129.2" class="w-5 h-5"><path d="M153.9 469.4c-2.9 6.7-6.2 13-10.2 18.9-5.4 7.9-9.8 13.3-13.2 16.1-5.3 4.9-11 7.4-17.1 7.5-4.4 0-9.7-1.3-15.8-3.8-6.2-2.6-11.9-3.8-17.2-3.8-5.6 0-11.6 1.3-18 3.8-6.4 2.6-11.6 3.9-15.7 4-5.9.2-11.7-2.3-17.4-7.3-3.7-3.2-8.3-8.8-13.8-16.7-5.9-8.5-10.8-18.4-14.8-29.5C-8.1 419.2-7 393.4 3.2 374.4c5.4-9.6 12.6-17.2 21.4-22.8 8.9-5.6 18.5-8.4 28.9-8.5 5.7 0 13.2 1.5 22.4 4.5 9.1 3 15 4.6 17.7 4.6 2.2 0 9.2-1.8 21.1-5.5 11.3-3.2 20.8-4.5 28.3-4 20.9 1.7 36.6 9.3 47.1 23.1-18.6 11.3-27.7 27-27.3 46.1.3 15.4 5.8 28.2 16.7 38.3 5 4.8 10.6 8.5 16.9 11.1-1.4 4-2.9 7.8-4.6 11.5z" fill="currentColor"/></svg>
+                <span>Play Store</span>
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="rounded-[2.5rem] bg-white text-black p-6 w-[320px] mx-auto shadow-squish">
+              <div class="rounded-2xl bg-black text-white p-4 flex items-center justify-between">
+                <span class="font-bold">McFunky</span>
+                <span class="text-sm">9:41</span>
+              </div>
+              <div class="mt-4 grid gap-4">
+                <div class="rounded-2xl bg-mustard-100 p-4">
+                  <p class="font-bold text-black">New rewards unlocked!</p>
+                  <p class="text-sm text-black/80">Free fries after your next (pretend) order.</p>
+                </div>
+                <div class="rounded-2xl bg-ketchup-50 p-4">
+                  <p class="font-bold text-ketchup-700">Limited drop: Truffle Mayo</p>
+                  <p class="text-sm text-ketchup-800/80">Fancy, huh? Add it on any burger.</p>
+                </div>
+                <div class="rounded-2xl bg-gray-100 p-4">
+                  <p class="font-bold">Find a store</p>
+                  <p class="text-sm text-gray-700">Auto detect or set your city.</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-center text-white/80 text-sm">App UI mockup</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Locations -->
+    <section id="locations" class="relative py-16 sm:py-24">
+      <div class="absolute inset-0 -z-10 bg-white"></div>
+      <div class="mx-auto max-w-7xl px-3 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-ketchup-700">Find a McFunky</h2>
+          <p class="text-gray-600 max-w-prose">We exist on the internet and in your imagination. Use the (fake) locator below.</p>
+        </div>
+        <div class="mt-8 grid lg:grid-cols-3 gap-6">
+          <div class="rounded-3xl border border-black/10 p-6 shadow-card">
+            <p class="font-extrabold text-lg">London</p>
+            <p class="text-gray-600">221B Baker St, NW1</p>
+            <a href="#order" class="mt-3 inline-flex items-center gap-2 rounded-full bg-black text-white px-4 py-2 font-semibold">Order Pickup</a>
+          </div>
+          <div class="rounded-3xl border border-black/10 p-6 shadow-card">
+            <p class="font-extrabold text-lg">Manchester</p>
+            <p class="text-gray-600">42 Canal St, M1</p>
+            <a href="#order" class="mt-3 inline-flex items-center gap-2 rounded-full bg-black text-white px-4 py-2 font-semibold">Order Pickup</a>
+          </div>
+          <div class="rounded-3xl border border-black/10 p-6 shadow-card">
+            <p class="font-extrabold text-lg">Birmingham</p>
+            <p class="text-gray-600">99 New St, B2</p>
+            <a href="#order" class="mt-3 inline-flex items-center gap-2 rounded-full bg-black text-white px-4 py-2 font-semibold">Order Pickup</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Banner -->
+    <section id="order" class="relative py-16">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ketchup-600 to-mustard-400"></div>
+      <div class="mx-auto max-w-7xl px-3 sm:px-6">
+        <div class="rounded-3xl bg-white/90 border border-white/70 shadow-squish p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="font-display text-2xl sm:text-4xl font-extrabold text-ketchup-700">Ready to (pretend) feast?</h3>
+            <p class="text-gray-700 mt-2">Add items to your tray and checkout with zero calories, zero regrets.</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <button class="px-6 py-3 bg-black text-white rounded-full font-bold shadow-card">Start an Order</button>
+            <button class="px-6 py-3 bg-white border border-black/10 rounded-full font-bold">View Cart (0)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative border-t border-white/40 bg-black text-white">
+      <div class="mx-auto max-w-7xl px-3 sm:px-6 py-10">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-2xl bg-gradient-to-br from-mustard-300 to-mustard-500 grid place-items-center">
+                <span class="text-2xl"></span>
+              </div>
+              <span class="font-display text-2xl font-extrabold">McFunky</span>
+            </div>
+            <p class="mt-4 text-white/70">A modern, funky mock of a popular fast food brand. Not affiliated with any real company.</p>
+          </div>
+          <div>
+            <p class="font-bold mb-3">Explore</p>
+            <ul class="space-y-2 text-white/80">
+              <li><a class="hover:underline" href="#menu">Menu</a></li>
+              <li><a class="hover:underline" href="#deals">Deals</a></li>
+              <li><a class="hover:underline" href="#app">App</a></li>
+              <li><a class="hover:underline" href="#locations">Locations</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-bold mb-3">Company</p>
+            <ul class="space-y-2 text-white/80">
+              <li><a class="hover:underline" href="#">About</a></li>
+              <li><a class="hover:underline" href="#">Careers</a></li>
+              <li><a class="hover:underline" href="#">Press</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-bold mb-3">Get Updates</p>
+            <form class="flex gap-2">
+              <input type="email" placeholder="Email address" class="flex-1 rounded-xl px-4 py-3 text-black" />
+              <button class="px-5 py-3 bg-mustard-400 text-black font-bold rounded-xl">Join</button>
+            </form>
+          </div>
+        </div>
+        <div class="mt-8 text-xs text-white/60">
+          <p>Disclaimer: This is a fictional demo site built for design and educational purposes. All names and items are made up.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+    </script>
+  </body>
+</html>

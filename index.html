@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Jonas - Web & Game Developer</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Turret+Road:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Custom Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            turret: ['Turret Road', 'cursive']
+          },
+          colors: {
+            skin: '#009dd0',
+            mirage: '#2d3444',
+            'text-dark': 'hsl(242, 8%, 85%)',
+            'text-light': 'hsl(242, 8%, 95%)',
+            'bg-dark': 'hsl(242, 19%, 5%)',
+            'box-dark': 'hsl(242, 14%, 10%)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body class="bg-bg-dark text-text-dark font-poppins">
+
+  <!-- Navbar -->
+  <header class="p-4 flex justify-between items-center bg-dark text-white">
+    <div class="text-2xl font-bold">Jonas Skukauskas</div>
+    <nav class="space-x-4">
+      <a href="#home" class="hover:text-skin">Home</a>
+      <a href="#about" class="hover:text-skin">About</a>
+      <a href="#skills" class="hover:text-skin">Skills</a>
+      <a href="#work" class="hover:text-skin">Work</a>
+      <a href="#contact" class="hover:text-skin">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+
+    <!-- Home Section -->
+    <section id="home" class="text-center py-20 px-4 bg-cover bg-center bg-black">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl font-bold text-text-light mb-4">Hi, I'm Jonas</h1>
+        <h2 class="text-2xl text-skin mb-4">Web & Game Developer</h2>
+        <p class="mb-6 max-w-2xl mx-auto">I have experience in web design and game development.</p>
+        <a href="#about" class="inline-block px-6 py-3 bg-skin text-white font-medium rounded hover:bg-mirage transition">More About Me</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4">
+      <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        <img src="JonasPFP.png" alt="About" class="rounded-lg w-full shadow-lg">
+        <div>
+          <h2 class="text-3xl font-bold text-text-light mb-4">About Me</h2>
+          <p class="mb-6">I have been making my own websites and working on projects as a volunteer for two years.</p>
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="bg-box-dark p-4 rounded text-center">
+              <i class="uil uil-award text-2xl text-skin"></i>
+              <p class="font-medium">2+ Years</p>
+              <p class="text-sm">Experience</p>
+            </div>
+            <div class="bg-box-dark p-4 rounded text-center">
+              <i class="uil uil-suitcase-alt text-2xl text-skin"></i>
+              <p class="font-medium">10+ Projects</p>
+              <p class="text-sm">Completed</p>
+            </div>
+            <div class="bg-box-dark p-4 rounded text-center">
+              <i class="uil uil-headphones-alt text-2xl text-skin"></i>
+              <p class="font-medium">24/7</p>
+              <p class="text-sm">Support</p>
+            </div>
+          </div>
+          <a href="#contact" class="inline-block px-6 py-3 bg-skin text-white font-medium rounded hover:bg-mirage transition">Contact Me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 bg-box-dark">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-text-light mb-8">My Skills</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-left">
+          <div><h3 class="font-bold mb-2">HTML</h3><div class="h-2 bg-skin rounded w-[90%]"></div></div>
+          <div><h3 class="font-bold mb-2">CSS</h3><div class="h-2 bg-skin rounded w-[80%]"></div></div>
+          <div><h3 class="font-bold mb-2">JavaScript</h3><div class="h-2 bg-skin rounded w-[60%]"></div></div>
+          <div><h3 class="font-bold mb-2">React</h3><div class="h-2 bg-skin rounded w-[85%]"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="py-20 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-text-light mb-8">Recent Works</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-box-dark p-4 rounded shadow">
+            <img src="McFunkySplit.png" class="rounded mb-4">
+            <a href="http://localhost/mcdonalds.html" class="text-xl font-semibold">Web Design</a>
+          </div>
+          <div class="bg-box-dark px-2 pt-4 rounded shadow">
+            <img src="LUACode.png" class="rounded mb-4">
+            <h3 class="text-xl font-semibold">LUA Design</h3>
+          </div>
+          <div class="bg-box-dark p-4 rounded shadow">
+            <img src="https://i.postimg.cc/sXLjnC5p/work-2.png" class="rounded mb-4">
+            <h3 class="text-xl font-semibold">3D Asset Creation</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-box-dark">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-text-light mb-6">Get in Touch</h2>
+        <form class="space-y-6">
+          <input type="text" placeholder="Your Name" class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400">
+          <input type="email" placeholder="Your Email" class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400">
+          <textarea placeholder="Your Message" rows="5" class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400"></textarea>
+          <button type="submit" class="px-6 py-3 bg-skin text-white font-medium rounded hover:bg-mirage transition">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-box-dark p-6 text-center text-sm">
+    <div class="text-white font-bold text-xl">Jonas</div>
+    <p class="text-sm">Web & Game Developer</p>
+    <div class="flex justify-center space-x-4 mt-4">
+      <a href="https://www.instagram.com/jonasskuka/" class="text-xl hover:text-skin"><i class="uil uil-instagram"></i></a>
+      <a href="https://x.com/JonasSkuka" class="text-xl hover:text-skin"><i class="uil uil-twitter"></i></a>
+    </div>
+  </footer>
+</body>
+</html>
