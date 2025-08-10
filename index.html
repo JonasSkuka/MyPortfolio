@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -114,15 +113,15 @@
         <h2 class="text-3xl font-bold text-text-light mb-8">Recent Works</h2>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-box-dark p-4 rounded shadow">
-            <img src="McFunkySplit.png" class="rounded mb-4">
+            <img src="McFunkySplit.png" class="rounded mb-4" alt="Work sample 1">
             <a href="http://localhost/mcdonalds.html" class="text-xl font-semibold">Web Design</a>
           </div>
           <div class="bg-box-dark px-2 pt-4 rounded shadow">
-            <img src="LUACode.png" class="rounded mb-4">
+            <img src="LUACode.png" class="rounded mb-4" alt="Work sample 2">
             <h3 class="text-xl font-semibold">LUA Design</h3>
           </div>
           <div class="bg-box-dark p-4 rounded shadow">
-            <img src="https://i.postimg.cc/sXLjnC5p/work-2.png" class="rounded mb-4">
+            <img src="https://i.postimg.cc/sXLjnC5p/work-2.png" class="rounded mb-4" alt="Work sample 3">
             <h3 class="text-xl font-semibold">3D Asset Creation</h3>
           </div>
         </div>
@@ -133,11 +132,35 @@
     <section id="contact" class="py-20 px-4 bg-box-dark">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl font-bold text-text-light mb-6">Get in Touch</h2>
-        <form class="space-y-6">
-          <input type="text" placeholder="Your Name" class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400">
-          <input type="email" placeholder="Your Email" class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400">
-          <textarea placeholder="Your Message" rows="5" class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400"></textarea>
-          <button type="submit" class="px-6 py-3 bg-skin text-white font-medium rounded hover:bg-mirage transition">Send Message</button>
+
+        <!-- Formspree-connected form -->
+        <form id="contact-form"
+              action="https://formspree.io/f/xeozvpgq"
+              method="POST"
+              class="space-y-6 max-w-2xl mx-auto text-left">
+
+          <!-- Formspree needs named fields -->
+          <input type="text" name="name" placeholder="Your Name" required
+                class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-skin">
+
+          <input type="email" name="email" placeholder="Your Email" required
+                class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-skin">
+
+          <textarea name="message" placeholder="Your Message" rows="5" required
+                    class="w-full p-3 rounded bg-bg-dark text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-skin"></textarea>
+
+          <!-- Optional extras -->
+          <input type="hidden" name="_subject" value="New message from your portfolio site">
+          <!-- simple anti-bot honeypot -->
+          <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off">
+
+          <button type="submit"
+                  class="w-full px-6 py-3 bg-skin text-white font-medium rounded hover:bg-mirage transition">
+            Send Message
+          </button>
+
+          <!-- status area -->
+          <p id="form-status" class="text-sm text-text-light/80"></p>
         </form>
       </div>
     </section>
@@ -148,9 +171,43 @@
     <div class="text-white font-bold text-xl">Jonas</div>
     <p class="text-sm">Web & Game Developer</p>
     <div class="flex justify-center space-x-4 mt-4">
-      <a href="https://www.instagram.com/jonasskuka/" class="text-xl hover:text-skin"><i class="uil uil-instagram"></i></a>
-      <a href="https://x.com/JonasSkuka" class="text-xl hover:text-skin"><i class="uil uil-twitter"></i></a>
+      <a href="https://www.instagram.com/jonasskuka/" class="text-xl hover:text-skin" aria-label="Instagram"><i class="uil uil-instagram"></i></a>
+      <a href="https://x.com/JonasSkuka" class="text-xl hover:text-skin" aria-label="Twitter / X"><i class="uil uil-twitter"></i></a>
     </div>
   </footer>
+
+  <!-- Lightweight JS to submit via fetch and show a success/fail message without leaving the page -->
+  <script>
+    (function () {
+      const form = document.getElementById('contact-form');
+      const statusEl = document.getElementById('form-status');
+
+      async function handleSubmit(e) {
+        e.preventDefault();
+        statusEl.textContent = 'Sending…';
+
+        try {
+          const data = new FormData(form);
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            form.reset();
+            statusEl.textContent = 'Thanks! Your message has been sent.';
+          } else {
+            const json = await res.json().catch(() => ({}));
+            statusEl.textContent = json.error || 'Oops, something went wrong. Please try again.';
+          }
+        } catch (err) {
+          statusEl.textContent = 'Network error. Please try again later.';
+        }
+      }
+
+      form.addEventListener('submit', handleSubmit);
+    })();
+  </script>
 </body>
 </html>
